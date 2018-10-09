@@ -1,0 +1,14 @@
+{
+  "name": "@journeyapps/journey-html-bridge-template",
+  "version": "0.0.0",
+  "description": "Used as a template to build a single HTML file that uses our iframe bridge",
+  "author": "JourneyApps",
+  "devDependencies": {
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "ts-loader": "^5.2.1",
+    "typescript": "^3.1.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}

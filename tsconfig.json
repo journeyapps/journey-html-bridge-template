@@ -1,0 +1,20 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "preserveSymlinks": true,
+      "outDir": "./dist",
+      "declarationDir": "./dist/@types",
+      "declaration": true,
+      "skipLibCheck": true,
+      "strictNullChecks": false,
+      "experimentalDecorators": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "suppressExcessPropertyErrors": true,
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "target":"es6",
+      "lib": ["es2016", "dom"]
+    },
+    "exclude": ["./dist", "./node_modules"]
+}
