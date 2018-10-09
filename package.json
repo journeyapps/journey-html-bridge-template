@@ -4,6 +4,7 @@
   "description": "Used as a template to build a single HTML file that uses our iframe bridge",
   "author": "JourneyApps",
   "devDependencies": {
+    "@types/node": "^10.11.5",
     "css-loader": "^1.0.0",
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
