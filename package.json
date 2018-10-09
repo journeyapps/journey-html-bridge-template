@@ -4,8 +4,12 @@
   "description": "Used as a template to build a single HTML file that uses our iframe bridge",
   "author": "JourneyApps",
   "devDependencies": {
+    "css-loader": "^1.0.0",
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.1",
     "webpack": "^4.20.2",
