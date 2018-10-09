@@ -10,7 +10,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'One File',
+      title: 'TITLE',
+      template: './src/template.html',
       filename: 'index.html',
       inlineSource: '.(js|css|ts)$'
     }),
