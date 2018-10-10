@@ -1,6 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const yaml = require('yaml');
+const fs = require('fs');
+
+const config = yaml.parse(fs.readFileSync('config.yml', 'utf8'));
+
+const {outputFileName, htmlTitle} = config;
 
 module.exports = {
   entry: './src/main.ts',
@@ -10,9 +16,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'TITLE',
+      title: htmlTitle,
       template: './src/template.html',
-      filename: 'index.html',
+      filename: outputFileName,
       inlineSource: '.(js|css|ts)$'
     }),
     new HtmlWebpackInlineSourcePlugin()

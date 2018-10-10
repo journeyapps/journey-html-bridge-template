@@ -15,16 +15,32 @@ This currently uses a linked `journey-iframe-client`, so clone that, yarn and ya
 ### Developing
 The entrypoint of the project is `src/main.ts`. Other files can be imported (required) from this.
 
-An HTML template is in `src/template.html`. It's title can be set in `webpack.config.js` under `HtmlWebpackPlugin` -> `title`. It is currently "TITLE".
+An HTML template is in `src/template.html`. It's title can and output filename cang be set in `config.yml`.
 
 ### Building
 To build, run:
 ```sh
-webpack
+yarn run build
 ```
 
-This builds a single HTML file to `dist/index.html`. You can set the filename in `webpack.config.js` under `HtmlWebpackPlugin` -> `filename`.
+While developing, you can run
+```sh
+yarn run build --watch
+```
+This will watch your files for changes, but won't livereload yet. This means that you will have to open your HTML file and then press reload when you have saved your changes.
 
-## TODO:
- - Use Editor FileAPI to upload built HTML file with a script.
- - Figure out why relative path was needed in `main.js`.
+This builds a single HTML file to `dist` with the filename provided in `config.yml`.
+
+### Uploading automatically
+Edit `config.yml` with your app's ID and your Editor Bearer token.
+
+Format:
+```yml
+token: get from Editor -> Edit Profile
+appId: The numeric part of the app's url, eg 580773fc6564696b09002079
+apiVersion: v4
+outputFileName: index.html
+htmlTitle: Title
+```
+
+Run `yarn run upload` to build and upload your HTML file to your app. If there is a file with the same name in your app, it will be replaced.
