@@ -13,64 +13,19 @@ const journeyIFrameClient = new JourneyIFrameClient();
 
 console.log("This is journeyIFrameClient: ", journeyIFrameClient);
 
-var gridTimelineLayout = {
-    css: 'gantt_container',
-    rows: [
-        {
-            cols: [
-                {
-                    // the default grid view
-                    view: "grid",
-                    scrollX: "scrollHor",
-                    scrollY: "scrollVer"
-                },
-                { resizer: true, width: 1 },
-                {
-                    // the default timeline view
-                    view: "timeline",
-                    scrollX: "scrollHor",
-                    scrollY: "scrollVer"
-                },
-                { view: 'scrollbar', id: 'scrollVer' }
-            ]
-        },
-        { view: "scrollbar", id: "scrollHor" }
-    ]
-};
-var timelineOnlyLayout = {
-    css: 'gantt_container',
-    cols: [
-        {
-            rows: [
-                { view: 'timeline', scrollX: 'scrollHor', scrollY: 'scrollVer' },
-                { view: 'scrollbar', id: 'scrollHor', group: 'horizontal' },
-            ]
-        },
-        { view: 'scrollbar', id: 'scrollVer' }
-    ]
-};
-
-gantt.config.layout = gridTimelineLayout;
-
 gantt.init("gantt_here");
 
 journeyIFrameClient.post('ready');
-document.getElementById('toggle_button').addEventListener("click", (e: Event) => { toggler(); });
+document.getElementById('toggle_button').addEventListener("click", (e: Event) => { toggle_grid(); });
 
-journeyIFrameClient.on('toggle', toggler);
+journeyIFrameClient.on('toggle', toggle_grid);
 
-var toggle_value = -1;
-
-function toggler() {
-    if (toggle_value == 1) {
-        gantt.config.layout = gridTimelineLayout;
-    }
-    else {
-        gantt.config.layout = timelineOnlyLayout;
-    }
-    toggle_value = toggle_value * (-1);
+var toggle = false;
+function toggle_grid() {
+    gantt.config.show_grid = toggle;
+    toggle = !toggle;
+    gantt.render()
     gantt.init("gantt_here");
-    gantt.render();
 }
 
 journeyIFrameClient.on('loadTasks', (tasks) => {
