@@ -10,8 +10,6 @@ Make sure you have direnv installed and run `direnv allow` once.
 yarn install
 ```
 
-This currently uses a linked `journey-iframe-client`, so clone that, yarn and yarn link etc. and also run `webpack`.
-
 ### Developing
 The entrypoint of the project is `src/main.ts`. Other files can be imported (required) from this.
 
