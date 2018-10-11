@@ -11,9 +11,12 @@ yarn install
 ```
 
 ### Developing
+
+Copy and paste `config_template.yml` and rename it to `config.yml`. This file is gitignored will contain authentication tokens.
+
 The entrypoint of the project is `src/main.ts`. Other files can be imported (required) from this.
 
-An HTML template is in `src/template.html`. It's title can and output filename cang be set in `config.yml`.
+An HTML template is in `src/template.html`. It's title can and output filename can be set in `config.yml`.
 
 ### Building
 To build, run:
