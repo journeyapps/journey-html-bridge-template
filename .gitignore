@@ -3,4 +3,5 @@ node_modules
 .DS_STORE
 .vscode
 yarn-error.log
+config.yml
 
