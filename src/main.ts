@@ -1,4 +1,4 @@
-import JourneyIFrameClient from '../node_modules/@journeyapps/journey-iframe-client/dist/bundle';
+const JourneyIFrameClient = require('journey-iframe-client');
 import './sass/main.scss';
 
 const g = require('./vendor/dhtmlxgantt');
