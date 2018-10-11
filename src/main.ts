@@ -13,9 +13,11 @@ const journeyIFrameClient = new JourneyIFrameClient();
 
 console.log("This is journeyIFrameClient: ", journeyIFrameClient);
 
-console.log('gantt', g);
+gantt.config.prevent_default_scroll = false;
 
 gantt.init("gantt_here");
+
+journeyIFrameClient.post('Ready');
 
 journeyIFrameClient.on('loadTasks', (tasks) => {
     console.log('tasks', tasks);
