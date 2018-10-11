@@ -15,33 +15,31 @@ console.log("This is journeyIFrameClient: ", journeyIFrameClient);
 
 var gridTimelineLayout = {
     css: 'gantt_container',
-    cols: [
+    rows: [
         {
-            // the default grid view
-            view: "grid",
-            scrollX: "scrollHor",
-            scrollY: "scrollVer"
-        },
-        { resizer: true, width: 1 },
-        {
-            rows: [
-                { view: 'timeline', scrollX: 'scrollHor', scrollY: 'scrollVer' },
-                { view: 'scrollbar', id: 'scrollHor', group: 'horizontal' },
+            cols: [
+                {
+                    // the default grid view
+                    view: "grid",
+                    scrollX: "scrollHor",
+                    scrollY: "scrollVer"
+                },
+                { resizer: true, width: 1 },
+                {
+                    // the default timeline view
+                    view: "timeline",
+                    scrollX: "scrollHor",
+                    scrollY: "scrollVer"
+                },
+                { view: 'scrollbar', id: 'scrollVer' }
             ]
         },
-        { view: 'scrollbar', id: 'scrollVer' }
+        { view: "scrollbar", id: "scrollHor" }
     ]
 };
 var timelineOnlyLayout = {
     css: 'gantt_container',
     cols: [
-        {
-            width: 1,
-            rows: [
-                { view: 'grid', scrollX: 'gridScrollX', scrollY: 'scrollVer' },
-                { view: 'scrollbar', id: 'gridScrollX', group: 'horizontal' },
-            ]
-        },
         {
             rows: [
                 { view: 'timeline', scrollX: 'scrollHor', scrollY: 'scrollVer' },
