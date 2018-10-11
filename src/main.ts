@@ -13,11 +13,67 @@ const journeyIFrameClient = new JourneyIFrameClient();
 
 console.log("This is journeyIFrameClient: ", journeyIFrameClient);
 
-gantt.config.prevent_default_scroll = false;
+var gridTimelineLayout = {
+    css: 'gantt_container',
+    cols: [
+        {
+            // the default grid view
+            view: "grid",
+            scrollX: "scrollHor",
+            scrollY: "scrollVer"
+        },
+        { resizer: true, width: 1 },
+        {
+            rows: [
+                { view: 'timeline', scrollX: 'scrollHor', scrollY: 'scrollVer' },
+                { view: 'scrollbar', id: 'scrollHor', group: 'horizontal' },
+            ]
+        },
+        { view: 'scrollbar', id: 'scrollVer' }
+    ]
+};
+var timelineOnlyLayout = {
+    css: 'gantt_container',
+    cols: [
+        {
+            width: 1,
+            rows: [
+                { view: 'grid', scrollX: 'gridScrollX', scrollY: 'scrollVer' },
+                { view: 'scrollbar', id: 'gridScrollX', group: 'horizontal' },
+            ]
+        },
+        {
+            rows: [
+                { view: 'timeline', scrollX: 'scrollHor', scrollY: 'scrollVer' },
+                { view: 'scrollbar', id: 'scrollHor', group: 'horizontal' },
+            ]
+        },
+        { view: 'scrollbar', id: 'scrollVer' }
+    ]
+};
+
+gantt.config.layout = gridTimelineLayout;
 
 gantt.init("gantt_here");
 
-journeyIFrameClient.post('Ready');
+journeyIFrameClient.post('ready');
+document.getElementById('toggle_button').addEventListener("click", (e: Event) => { toggler(); });
+
+journeyIFrameClient.on('toggle', toggler);
+
+var toggle_value = -1;
+
+function toggler() {
+    if (toggle_value == 1) {
+        gantt.config.layout = gridTimelineLayout;
+    }
+    else {
+        gantt.config.layout = timelineOnlyLayout;
+    }
+    toggle_value = toggle_value * (-1);
+    gantt.init("gantt_here");
+    gantt.render();
+}
 
 journeyIFrameClient.on('loadTasks', (tasks) => {
     console.log('tasks', tasks);
