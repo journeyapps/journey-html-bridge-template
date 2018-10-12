@@ -8,3 +8,13 @@ html, body{
     overflow: hidden;
 }
 
+// Example of how to use theme variables
+.gantt_container,
+.gantt_tooltip,
+.gantt_grid_scale,
+.gantt_task_scale,
+.gantt_task_vscroll,
+.gantt_row,
+.gantt_task_row {
+    background: var(--theme-background);
+}
