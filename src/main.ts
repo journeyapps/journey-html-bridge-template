@@ -15,10 +15,22 @@ console.log("This is journeyIFrameClient: ", journeyIFrameClient);
 
 gantt.init("gantt_here");
 
-journeyIFrameClient.post('ready');
+ready();
 document.getElementById('toggle_button').addEventListener("click", (e: Event) => { toggle_grid(); });
+document.getElementById('nav_button').addEventListener("click", (e: Event) => { navigate(); });
 
 journeyIFrameClient.on('toggle', toggle_grid);
+
+async function ready() {
+    let tasks = await journeyIFrameClient.post('ready');
+    console.log('tasks', tasks);
+    gantt.parse(tasks);
+}
+
+function navigate() {
+    console.log('trigger linkToView');
+    journeyIFrameClient.post('linkToView', 'foo')
+}
 
 var toggle = false;
 function toggle_grid() {
