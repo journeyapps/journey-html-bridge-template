@@ -1770,9 +1770,9 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-journey-iframe-client@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/journey-iframe-client/-/journey-iframe-client-0.1.2.tgz#2d98c8ab1691e66394cac1797f93a34a6685b3b1"
+journey-iframe-client@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/journey-iframe-client/-/journey-iframe-client-0.2.0.tgz#395293130e4badecb2a3405cd7828fef7ee6991c"
 
 js-base64@^2.1.8:
   version "2.4.9"
