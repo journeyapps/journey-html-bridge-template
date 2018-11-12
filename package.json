@@ -23,6 +23,6 @@
     "yaml": "^1.0.0"
   },
   "dependencies": {
-    "journey-iframe-client": "^0.1.2"
+    "journey-iframe-client": "0.2.0"
   }
 }
