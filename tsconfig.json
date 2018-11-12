@@ -13,8 +13,8 @@
       "suppressExcessPropertyErrors": true,
       "noImplicitAny": false,
       "sourceMap": true,
-      "target":"es6",
-      "lib": ["es2016", "dom"]
+      "target":"es5",
+      "lib": ["es2015", "dom"]
     },
     "exclude": ["./dist", "./node_modules"]
 }
