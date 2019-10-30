@@ -3,3 +3,4 @@ appId:
 apiVersion: v4
 outputFileName: index.html
 htmlTitle: Title
+branch: ~
