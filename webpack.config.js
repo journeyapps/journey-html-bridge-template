@@ -29,7 +29,7 @@ module.exports = {
         exampleParameter: 'EXAMPLE_PARAMETER'
       },
       filename: outputFileName,
-      inlineSource: '.(js|css|ts)$'
+      inlineSource: '.(js|css|ts|json|png|gif|svg)$'
     }),
     new HtmlWebpackInlineSourcePlugin()
   ],
@@ -37,10 +37,18 @@ module.exports = {
     minimize: !isDev // only minimise when not running in dev-mode
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
   module: {
     rules: [
+      {
+        test: /\.(svg|png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'base64-inline-loader',
+          },
+        ],
+      },
       { test: /\.tsx?$/, loader: 'ts-loader' },
       {
         test: /\.scss$/,
