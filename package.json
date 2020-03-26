@@ -7,18 +7,22 @@
   "scripts": {
     "build": "webpack",
     "build:dev": "webpack --dev",
-    "upload": "webpack && node ./scripts/upload.js"
+    "upload": "yarn build && node ./scripts/upload.js",
+    "upload:oxide": "yarn build && ts-node ./scripts/upload-oxide.ts"
   },
   "devDependencies": {
     "@types/node": "^10.11.6",
+    "@types/node-fetch": "2.5.5",
     "css-loader": "^1.0.0",
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "node-fetch": "2.6.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "superagent": "^4.0.0-beta.5",
     "ts-loader": "^5.2.1",
+    "ts-node": "8.8.1",
     "typescript": "^3.1.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
