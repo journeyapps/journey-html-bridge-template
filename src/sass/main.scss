@@ -1,2 +1,130 @@
 @import 'example';
 
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.annotate-container{
+  position: relative;
+}
+
+.annotate-container > [id^=baseLayer]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background: grey;
+}
+
+.annotate-container > [id^=drawingLayer]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: transparent;
+}
+
+
+///
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 2.5vw;
+}
+
+div#myCanvas.annotate-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+div#myCanvas.annotate-container>div {
+  margin-bottom: 30px;
+  left: 0px !important;
+  top: -29px !important;
+}
+
+.annotate-container>[id^=baseLayer] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background: grey;
+}
+
+.annotate-container>[id^=drawingLayer] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: transparent;
+}
+
+div.my-image-selector {
+  position: absolute;
+  top: 2.5vw !important;
+  right: 2.5vw !important;
+}
+
+.btn-primary {
+  background-color: #D8D8D8 !important;
+  border-color: #D8D8D8 !important;
+  color: black;
+}
+
+label.btn-primary.active,
+label.btn-primary.active.focus,
+label.btn-primary:active,
+label.btn-primary:focus {
+  color: white !important;
+  background-color: #2d3134 !important;
+  border-color: #2d3134 !important;
+  outline: none !important;
+}
+
+div.my-image-selector button#save-image.btn {
+  color: black !important;
+  background-color: #D8D8D8 !important;
+}
+
+div.my-image-selector input#full.btn {
+  color: black !important;
+  background-color: #D8D8D8 !important;
+}
+
+div.my-image-selector label {
+  display: none;
+}
+
+label#circle-label {
+  padding: 3.5px 12px;
+}
+
+span {
+  font-size: 18px;
+}
+
+svg.svg-inline--fa {
+  border-color: none !important;
+}
+
+button#undoaction.btn.btn-primary.annotate-undo {
+  margin-right: 1px !important;
+}
+
+button#redoaction.btn.btn-primary.annotate-redo {
+  margin-left: 1px !important;
+}
+
