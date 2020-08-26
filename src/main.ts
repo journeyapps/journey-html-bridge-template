@@ -5,6 +5,8 @@ const $ = require('jquery');
 require('bootstrap');
 // require('./vendor/colorpicker');
 // require('spectrum-colorpicker');
+
+// using https://github.com/djaodjin/djaodjin-annotate/
 require('./vendor/annotate');
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../node_modules/spectrum-colorpicker/spectrum.css';
