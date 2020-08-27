@@ -37,6 +37,12 @@ MIT License
         this.init();
     }
     Annotate.prototype = {
+        setColor: function(color) {
+            var self = this;
+            self.options.color = color;
+            self.clear();
+            self.redraw();
+        },
         init: function() {
             var self = this;
             self.linewidth = self.options.linewidth;
@@ -380,11 +386,11 @@ MIT License
                 switch (element.type) {
                     case 'rectangle':
                         self.drawRectangle(self.baseContext, element.fromx, element.fromy,
-                            element.tox, element.toy);
+                            element.tox, element.toy, element.color);
                         break;
                     case 'arrow':
                         self.drawArrow(self.baseContext, element.fromx, element.fromy,
-                            element.tox, element.toy);
+                            element.tox, element.toy, element.color);
                         break;
                     case 'pen':
                         for (var b = 0; b < element.points.length - 1; b++) {
@@ -392,16 +398,16 @@ MIT License
                             var fromy = element.points[b][1];
                             var tox = element.points[b + 1][0];
                             var toy = element.points[b + 1][1];
-                            self.drawPen(self.baseContext, fromx, fromy, tox, toy);
+                            self.drawPen(self.baseContext, fromx, fromy, tox, toy, element.color);
                         }
                         break;
                     case 'text':
                         self.drawText(self.baseContext, element.text, element.fromx,
-                            element.fromy, element.maxwidth);
+                            element.fromy, element.maxwidth, element.color);
                         break;
                     case 'circle':
                         self.drawCircle(self.baseContext, element.fromx, element.fromy,
-                            element.tox, element.toy);
+                            element.tox, element.toy, element.color);
                         break;
                     default:
                 }
@@ -412,17 +418,17 @@ MIT License
             // Clear Canvas
             self.drawingCanvas.width = self.drawingCanvas.width;
         },
-        drawRectangle: function(context, x, y, w, h) {
+        drawRectangle: function(context, x, y, w, h, c) {
             var self = this;
             context.beginPath();
             context.rect(x, y, w, h);
             context.fillStyle = 'transparent';
             context.fill();
             context.lineWidth = self.linewidth;
-            context.strokeStyle = self.options.color;
+            context.strokeStyle = c ? c : self.options.color;
             context.stroke();
         },
-        drawCircle: function(context, x1, y1, x2, y2) {
+        drawCircle: function(context, x1, y1, x2, y2, c) {
             var radiusX = (x2 - x1) * 0.5;
             var radiusY = (y2 - y1) * 0.5;
             var centerX = x1 + radiusX;
@@ -439,11 +445,11 @@ MIT License
                     Math.sin(a));
             }
             context.lineWidth = self.linewidth;
-            context.strokeStyle = self.options.color;
+            context.strokeStyle = c ? c : self.options.color;
             context.closePath();
             context.stroke();
         },
-        drawArrow: function(context, x, y, w, h) {
+        drawArrow: function(context, x, y, w, h, c) {
             var self = this;
             var angle = Math.atan2(h - y, w - x);
             context.beginPath();
@@ -455,16 +461,18 @@ MIT License
             context.lineTo(w, h);
             context.lineTo(w - self.linewidth * 5 * Math.cos(angle - Math.PI /
                 6), h - self.linewidth * 5 * Math.sin(angle - Math.PI / 6));
-            context.strokeStyle = self.options.color;
+            context.strokeStyle = c ? c : self.options.color;
             context.stroke();
         },
-        drawPen: function(context, fromx, fromy, tox, toy) {
+        drawPen: function(context, fromx, fromy, tox, toy, c) {
             var self = this;
+            context.beginPath();
             context.lineWidth = self.linewidth;
             context.moveTo(fromx, fromy);
             context.lineTo(tox, toy);
-            context.strokeStyle = self.options.color;
+            context.strokeStyle = c ? c : self.options.color;
             context.stroke();
+            context.closePath();
         },
         wrapText: function(drawingContext, text, x, y, maxWidth, lineHeight) {
             var lines = text.split('\n');
@@ -486,11 +494,11 @@ MIT License
                 drawingContext.fillText(line, x, y + i * lineHeight);
             }
         },
-        drawText: function(context, text, x, y, maxWidth) {
+        drawText: function(context, text, x, y, maxWidth, c) {
             var self = this;
             context.font = self.fontsize + ' sans-serif';
             context.textBaseline = 'top';
-            context.fillStyle = self.options.color;
+            context.fillStyle = c ? c : self.options.color;
             self.wrapText(context, text, x + 3, y + 4, maxWidth, 25);
         },
         pushText: function() {
@@ -503,7 +511,8 @@ MIT License
                     text: text,
                     fromx: self.fromx,
                     fromy: self.fromy,
-                    maxwidth: self.tox
+                    maxwidth: self.tox,
+                    color: self.options.color
                 });
                 if (self.storedUndo.length > 0) {
                     self.storedUndo = [];
@@ -519,6 +528,8 @@ MIT License
             if (self.$textbox.is(':visible')) {
                 self.pushText();
             }
+            self.clear();
+            self.redraw();
         },
         annotatestart: function(event) {
             var self = this;
@@ -536,7 +547,8 @@ MIT License
                         text: text,
                         fromx: (self.fromxText - offset.left) * self.compensationWidthRate,
                         fromy: (self.fromyText - offset.top) * self.compensationWidthRate,
-                        maxwidth: self.tox
+                        maxwidth: self.tox,
+                        color: self.options.color
                     });
                     if (self.storedUndo.length > 0) {
                         self.storedUndo = [];
@@ -581,7 +593,8 @@ MIT License
                             fromx: self.fromx,
                             fromy: self.fromy,
                             tox: self.tox,
-                            toy: self.toy
+                            toy: self.toy,
+                            color: self.options.color
                         });
                         break;
                     case 'circle':
@@ -590,7 +603,8 @@ MIT License
                             fromx: self.fromx,
                             fromy: self.fromy,
                             tox: self.tox,
-                            toy: self.toy
+                            toy: self.toy,
+                            color: self.options.color
                         });
                         break;
                     case 'arrow':
@@ -599,7 +613,8 @@ MIT License
                             fromx: self.fromx,
                             fromy: self.fromy,
                             tox: self.tox,
-                            toy: self.toy
+                            toy: self.toy,
+                            color: self.options.color
                         });
                         break;
                     case 'text':
@@ -607,19 +622,22 @@ MIT License
                             left: self.fromxText + 2,
                             top: self.fromyText,
                             width: self.tox - 12,
-                            height: self.toy
+                            height: self.toy,
+                            color: self.options.color
                         });
                         break;
                     case 'pen':
                         self.storedElement.push({
                             type: 'pen',
-                            points: self.points
+                            points: self.points,
+                            color: self.options.color
                         });
                         for (var i = 0; i < self.points.length - 1; i++) {
                             self.fromx = self.points[i][0];
                             self.fromy = self.points[i][1];
                             self.tox = self.points[i + 1][0];
                             self.toy = self.points[i + 1][1];
+
                             self.drawPen(self.baseContext, self.fromx, self.fromy, self
                                     .tox,
                                 self.toy);
@@ -686,8 +704,10 @@ MIT License
                         self.tox,
                         self.toy
                     ]);
+                    let prevColor = self.drawingContext.strokeStyle;
                     self.drawPen(self.drawingContext, self.fromx, self.fromy, self.tox,
                         self.toy);
+                    self.drawingContext.strokeStyle = prevColor;
                     break;
                 case 'text':
                     self.clear();
@@ -786,7 +806,22 @@ MIT License
                 throw new Error('No annotate initialized for: #' + $(this).attr(
                     'id'));
             }
-        } else {
+        } else if (options === 'setColor') {
+            if ($annotate) {
+                $annotate.setColor(cmdOption);
+            } else {
+                throw new Error('No annotate initialized for: #' + $(this).attr(
+                    'id'));
+            }
+        } else if (options === 'redraw') {
+            if ($annotate) {
+                $annotate.redraw();
+            } else {
+                throw new Error('No annotate initialized for: #' + $(this).attr(
+                    'id'));
+            }
+        }
+        else {
             var opts = $.extend({}, $.fn.annotate.defaults, options);
             var annotate = new Annotate($(this), opts);
             $(this).data('annotate', annotate);

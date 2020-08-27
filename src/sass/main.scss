@@ -40,6 +40,7 @@ body {
   padding: 2.5vw;
 }
 
+
 div#myCanvas.annotate-container {
   display: flex;
   justify-content: flex-start;
@@ -74,8 +75,9 @@ div#myCanvas.annotate-container>div {
 
 div.my-image-selector {
   position: absolute;
-  top: 2.5vw !important;
-  right: 2.5vw !important;
+  top: 48px !important;
+  left: 8px !important;
+  z-index: 100;
 }
 
 .btn-primary {
@@ -128,3 +130,10 @@ button#redoaction.btn.btn-primary.annotate-redo {
   margin-left: 1px !important;
 }
 
+
+.btn-group {
+  position: fixed;
+  top: 8px !important;
+  left: 8px !important;
+  z-index: 100;
+}
