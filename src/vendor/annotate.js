@@ -316,15 +316,35 @@ MIT License
             self.img = new Image();
             self.img.src = image.path;
             self.img.onload = function() {
-                if ((self.options.width && self.options.height) !== undefined ||
-                    (self.options.width && self.options.height) !== 0) {
-                    self.currentWidth = this.width;
-                    self.currentHeight = this.height;
-                    self.selectImageSize.width = this.width;
-                    self.selectImageSize.height = this.height;
-                } else {
+
+                if ((self.options.width && self.options.height) !== undefined &&
+                    (self.options.width && self.options.height) !== null) {
                     self.currentWidth = self.options.width;
                     self.currentHeight = self.options.height;
+                    self.selectImageSize.width = self.options.width;
+                    self.selectImageSize.height = self.options.height;
+                } else {
+                    var height;
+                    var width;
+
+                    var screenHeight = window.innerHeight || window.screen.availHeight;
+                    screenHeight = screenHeight - 56;
+                    var screenWidth = window.innerWidth || window.screen.availWidth;
+                    screenWidth = screenWidth - 16;
+
+                    if (self.img.naturalHeight < self.img.naturalWidth) {
+                        height = screenHeight;
+                        width = screenHeight * (self.img.naturalWidth / self.img.naturalHeight);
+                    } else {
+                        width = screenWidth;
+                        height = screenWidth * (self.img.naturalHeight / self.img.naturalWidth);
+                    }
+                    height = parseInt(height);
+                    width = parseInt(width);
+                    self.currentWidth = width;
+                    self.currentHeight = height;
+                    self.selectImageSize.width = width;
+                    self.selectImageSize.height = height;
                 }
                 self.baseCanvas.width = self.drawingCanvas.width = self.currentWidth;
                 self.baseCanvas.height = self.drawingCanvas.height = self.currentHeight;
